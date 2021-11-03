@@ -105,12 +105,13 @@ export class MailerService {
   public async sendMail(
     sendMailOptions: ISendMailOptions,
   ): Promise<SentMessageInfo> {
+    const _this = (this as any).mailerService as MailerService;
     if (sendMailOptions.transporterName) {
       if (
-        this.transporters &&
-        this.transporters.get(sendMailOptions.transporterName)
+        _this.transporters &&
+        _this.transporters.get(sendMailOptions.transporterName)
       ) {
-        return await this.transporters
+        return await _this.transporters
           .get(sendMailOptions.transporterName)!
           .sendMail(sendMailOptions);
       } else {
@@ -119,8 +120,8 @@ export class MailerService {
         );
       }
     } else {
-      if (this.transporter) {
-        return await this.transporter.sendMail(sendMailOptions);
+      if (_this.transporter) {
+        return await _this.transporter.sendMail(sendMailOptions);
       } else {
         throw new ReferenceError(`Transporter object undefined`);
       }
