@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "prepare": "npm run build",
+    "prepack": "yarn build",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.json",
     "deploy": "sh ./publish.sh",
